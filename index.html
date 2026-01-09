@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./user/style.css">
+    <title>
+        Users
+    </title>
+</head>
+
+<body>
+
+    <div class="users-card">
+        <h2>Userlar</h2>
+        <div class="loading">Yuklanmoqda...</div>
+        <ul class="user-list">
+
+        </ul>
+        <button class="add-btn">Yangi user qo'shish</button>
+    </div>
+
+    <div class="form-card hidden">
+        <h2>Yangi foydalanuvchi yaratish</h2>
+        <form action="">
+            <div class="form-child">
+                <label for="name">Ism:</label>
+                <div class="input-box">
+                    <input type="text" id="name" name="name" class="ism">
+                    <span class="warning-msg">ism kamida 3 ta harfdan iborat bo'lishi zarur!</span>
+                </div>
+            </div>
+            <button class="submit-btn">Qo'shish</button>
+        </form>
+    </div>
+
+
+    <script src="./user/app.js" defer></script>
+</body>
+
+</html>

@@ -1,0 +1,140 @@
+ * {
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+ }
+
+ body {
+     height: 100vh;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+
+ }
+
+ .loading {
+     display: none;
+     padding: 50px 0;
+     align-items: center;
+     justify-content: center;
+     text-align: center;
+
+ }
+
+ a {
+     text-decoration: none;
+ }
+
+ ul {
+     list-style: none;
+ }
+
+ .hidden {
+     display: none;
+ }
+
+ .visible {
+     display: block;
+ }
+
+
+ .users-card {
+     max-width: 300px;
+     box-shadow: 0px 0px 6px gray;
+     width: 100%;
+     border-radius: 10px;
+     padding: 20px 0;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     gap: 20px;
+     
+ }
+
+ .user-list {
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     flex-direction: column;
+     gap: 20px;
+    
+
+ }
+
+ .add-btn {
+     border: none;
+     padding: 5px 10px;
+     background-color: black;
+     border-radius: 5px;
+     color: white;
+     cursor: pointer;
+ }
+
+ .add-btn:hover {
+     background-color: rgb(51, 51, 51);
+ }
+
+ .form-card {
+     max-width: 400px;
+     box-shadow: 0px 0px 6px gray;
+     width: 100%;
+     border-radius: 10px;
+     padding: 20px;
+     text-align: center;
+ }
+
+ .form-card form {
+     display: flex;
+     align-items: center;
+     flex-direction: column;
+     gap: 15px;
+     margin-top: 30px;
+ }
+
+ .submit-btn {
+     border: none;
+     padding: 5px 10px;
+     background-color: black;
+     border-radius: 5px;
+     color: white;
+     cursor: pointer;
+ }
+
+ .submit-btn:hover {
+     background-color: rgb(51, 51, 51);
+ }
+
+ .ism {
+     font-size: 20px;
+ }
+
+ .users-card.hidden {
+     display: none;
+ }
+
+ .form-child{
+    display: flex;
+    gap: 10px;
+ }
+
+ .input-box{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    justify-content: start;
+    align-items: start;
+ }
+
+ .warning-msg{
+    font-size: 8px;
+    color: red;
+    display: none;
+ }
+
+ .warning-msg.hidden{
+    display: none;
+ }
+
+ .warning-msg.visible{
+    display: block;
+ }
