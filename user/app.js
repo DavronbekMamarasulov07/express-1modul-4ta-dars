@@ -32,15 +32,6 @@ const fetchUsers = async () => {
 };
 fetchUsers();
 
-const userlarniEkrangaChiqazish = (users) => {
-     userList.innerHTML = "";
-  users.forEach((user, index) => {
-    const li = document.createElement("li");
-    li.textContent = `${index + 1}. ${user.name} `;
-    userList.appendChild(li);
-  });
-};
-
 const userlarniTekshirish = (users) => {
   const li = document.createElement("li");
   if (users?.length == 0) {
@@ -49,6 +40,54 @@ const userlarniTekshirish = (users) => {
     return;
   }
 };
+
+const userlarniEkrangaChiqazish = (users) => {
+     userList.innerHTML = "";
+  users.forEach((user, index) => {
+    const li = document.createElement("li");
+     li.innerHTML = `
+        <span>Name:${user.name}</span>
+        <span>Age:${user.age}</span>
+        <button class="delete-btn" data-id="${user.id}">
+          Delete
+        </button>
+      `;
+    userList.appendChild(li);
+  });
+   addDeleteEvents();
+};
+
+
+
+function addDeleteEvents() {
+  const buttons = document.querySelectorAll(".delete-btn");
+
+  buttons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const id = btn.dataset.id; // data-id ni olib beradi bizga
+      deleteUser(id, btn);
+    });
+  });
+}
+
+function deleteUser(id, btn) {
+  fetch(`http://localhost:7777/users/${id}`, {
+    method: "DELETE",
+  })
+    .then((res) => {
+      if (!res.ok) throw new Error("O‘chirishda xato");
+
+      btn.closest("li").remove();
+      // btn → qaysi tugma bosilgan closest("li") → shu tugmaning ota <li> sini topadi remove() → ekrandan o‘chiradi
+    })
+    .catch((err) => {
+      console.error(err);
+      alert("O‘chirishda xato yuz berdi");
+    });
+}
+
+
+
 
 
 function handleInputLength() {

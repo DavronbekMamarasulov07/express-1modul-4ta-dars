@@ -57,8 +57,18 @@
      justify-content: center;
      flex-direction: column;
      gap: 20px;
+     width: 80%;
+ }
+ .user-list li{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
     
+ }
 
+ .delete-btn{
+    cursor: pointer;
  }
 
  .add-btn {
@@ -137,4 +147,12 @@
 
  .warning-msg.visible{
     display: block;
+ }
+
+ .delete-btn{
+    border: none;
+    padding: 5px 10px ;
+    background-color: red;
+    color: white;
+    border-radius: 5px;
  }
