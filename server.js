@@ -1,6 +1,8 @@
 import express from "express";
 import cors from "cors";
-import { createUser, deleteUser, getUserById, getUsers, searchUser, updateUser } from "./controller/userController.js";
+import { usersRouter } from "./routes/users.js";
+import { productsRouter } from "./routes/products.js";
+
 
 const app = express();
 
@@ -21,18 +23,28 @@ app.use(express.json());
 
 // Oddiy qilib aytganda, siz POST so‘rovda JSON yuborsangiz, u avtomatik ravishda obyektga aylantiriladi.
 
+app.use('/users', usersRouter)
+app.use("/products", productsRouter);
 
-
-app.get("/", (req, res) => {
+app.get("/", (_, res) => {
   res.send("Server ishlayapdi!");
 });
 
-app.get("/users", getUsers);
-app.get("/users/:id", getUserById);
-app.get("/search", searchUser);
-app.post("/users", createUser);
-app.delete("/users/:id", deleteUser);
-app.put("/users/:id", updateUser);
+
+// 404 - ya'ni sahifa topilmasa shu kodimiz ishlaydi.
+app.get(/.*/, (_,res) => {
+  res.status(404).send("Sahifa topilmadi!")
+})
+
+// errorlarni ushlash uchun
+app.use((err, req, res, next) => {
+  console.error(err.stack); // Konsolga xatoni chiqarish (debug uchun)
+
+  res.status(500).json({
+    success: false,
+    message: err.message || "Serverda xatolik yuz berdi",
+  });
+});
 
 app.listen(7777, () => {
   console.log("Server is running on http://localhost:7777");

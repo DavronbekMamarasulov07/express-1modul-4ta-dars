@@ -33,10 +33,10 @@ export const createUser = (req, res) => {
         .status(400)
         .json({ message: "Bunday foydalanuvchi allaqachin mavjud" });
     }
-    if (!req.body?.name) {
+    if (!req.body?.name && !req.body.age) {
       return res
         .status(400)
-        .json({ message: "Foydalanuvchi ismi majburiy!. 'name' topilmadi!" });
+        .json({ message: "Foydalanuvchi ma'lumotlari tuliq emas!" });
     }
 
     if (req.body?.name?.length <= 2) {
@@ -95,23 +95,25 @@ export const getUserById = (req, res) => {
 export const updateUser = (req, res) => {
   try {
     const userId = parseInt(req.params.id);
-    const updatedUser = req.body;
+   const { name, age } = req.body;
     const user = users.find((u) => u.id === userId);
     if (!user) {
       return res.status(404).json({ message: "Foydalanuvchi topilmadi" });
     }
 
-    if (!updatedUser) {
-      return res
-        .status(400)
-        .send("Foydalanuvchi ismi majburiy!. 'name' topilmadi!");
-    }
+      if (name !== undefined) {
+        user.name = name;
+      }
 
-    if (updatedUser?.name) {
-      user.name = updatedUser.name;
-    }
+      if (age !== undefined) {
+        user.age = age;
+      }
 
-    res.status(200).json({ message: "Foydalanuvchi yangilandi", user });
+      res.status(200).json({
+        message: "Foydalanuvchi yangilandi",
+        user,
+      });
+    
   } catch (error) {
     console.log(error);
     res.status(500).send("Serverda xatolik!");
@@ -140,3 +142,13 @@ export const searchUser = (req, res) => {
 
   res.status(200).json(filterUsers);
 };
+
+export const userError = (req, res, next) => {
+  try {
+    // Ataylab xato hosil qilamiz
+    throw new Error("Siz ataylab xato chiqargan marshrutga kirdingiz!");
+  } catch (err) {
+    // Xatoni catch qilib, next() orqali Middleware-ga uzatamiz
+    next(err);
+  }
+}
